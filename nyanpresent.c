@@ -89,8 +89,6 @@ static SDL_Surface *init_screen(int width, int height, int bpp)
 		exit(1);
 	}
 
-	SDL_WM_SetCaption("Cairo clock - Press Q to quit", "ICON");
-
 	return screen;
 }
 
@@ -166,7 +164,7 @@ int main(int argc, char **argv)
 	int prerender = 1;
 
 	if (argc < 2) {
-		printf("Usage: pdftoimage input_file.pdf (pagenum)\n");
+		printf("Usage: %s input_file.pdf (pagenum)\n",argv[0]);
 		return 0;
 	}
 
@@ -265,9 +263,6 @@ int main(int argc, char **argv)
 		}
 	}
 
-	/* Create a timer which will redraw the screen every 100 ms. */
-//    SDL_AddTimer (100, timer_cb, NULL);
-
 	while (SDL_WaitEvent(&event)) {
 		int new_page = 0;
 		switch (event.type) {
@@ -311,7 +306,7 @@ int main(int argc, char **argv)
 				}
 
 				SDL_BlitSurface(src_sf, NULL, screen, NULL);
-				//SDL_BlitSurface(n1l, NULL, screen, NULL);
+				
 				ofs = num_pages - page_num;
 				ofs /= num_pages;
 				x = n1l->w;
